@@ -1,0 +1,498 @@
+:root {
+  /* Светлый режим */
+  --primary-color: #075a36;
+  --secondary-color: #1a1781;
+  --dark-color: #2d3436;
+  --light-color: #f5f6fa;
+  --text-color: #000000;
+  --player-bg: rgba(255, 255, 255, 0.95);
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  --card-bg: rgba(255, 255, 255, 0.8);
+  --favorite-active: #710910;
+  --active-control-color: #075a36;
+  --search-bg: rgba(108, 92, 231, 0.1);
+  --nav-btn-bg: rgba(86, 24, 57, 0.1);
+}
+
+[data-dark] {
+  /* Темный режим */
+  --primary-color: #075a36;
+  --secondary-color: #1a1781;
+  --dark-color: #f5f6fa;
+  --light-color: #191414;
+  --text-color: #ffffff;
+  --player-bg: rgba(25, 20, 20, 0.95);
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --card-bg: rgba(40, 40, 40, 0.9);
+  --favorite-active: #710910;
+  --active-control-color: #075a36;
+  --search-bg: rgba(60, 60, 60, 0.3);
+  --nav-btn-bg: rgba(30, 30, 30, 0.7);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: var(--dark-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  background-color: var(--player-bg);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: var(--text-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.nav-btn.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.nav-btn:hover {
+  background-color: var(--nav-btn-bg);
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  background-color: var(--search-bg);
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+}
+
+#search-input {
+  border: none;
+  background: none;
+  outline: none;
+  width: 200px;
+  padding: 0.5rem;
+  color: var(--text-color);
+}
+
+#search-btn {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.content-section {
+  display: none;
+}
+
+.content-section.active {
+  display: block;
+}
+
+h2 {
+  margin-bottom: 1.5rem;
+  color: var(--light-color);
+}
+
+.empty-message {
+  color: var(--light-color) !important;
+  font-weight: 600;
+  text-align: center;
+  grid-column: 1 / -1;
+  padding: 2rem;
+}
+
+.tracks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.track-card {
+  background-color: var(--card-bg);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.track-card:hover {
+  transform: translateY(-5px);
+}
+
+.track-cover {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.track-info {
+  padding: 1rem;
+}
+
+.track-title {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-artist {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+  opacity: 0.8;
+}
+
+.track-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.play-btn-sm {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+}
+
+.play-btn-sm:hover {
+  opacity: 0.9;
+}
+
+.favorite-btn {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: color 0.2s ease;
+}
+
+.favorite-btn.active {
+  color: var(--favorite-active);
+}
+
+.albums-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.album-card {
+  background-color: var(--card-bg);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.album-card:hover {
+  transform: translateY(-5px);
+}
+
+.album-cover {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.album-info {
+  padding: 1rem;
+}
+
+.album-title {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.album-artist {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+.player-container {
+  background-color: var(--player-bg);
+  padding: 1rem 2rem;
+  box-shadow: var(--shadow);
+  position: sticky;
+  bottom: 0;
+  z-index: 100;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.player-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 200px;
+}
+
+.player-cover {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.player-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.player-title {
+  font-size: 1rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-artist {
+  font-size: 0.8rem;
+  color: var(--text-color);
+  opacity: 0.8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.progress-container {
+  flex: 1;
+  min-width: 300px;
+  margin: 0 1rem;
+  cursor: pointer;
+}
+
+.progress-bar {
+  height: 4px;
+  background-color: var(--primary-color);
+  width: 0%;
+  border-radius: 2px;
+  margin-bottom: 0.3rem;
+  transition: width 0.1s linear;
+}
+
+.time-display {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+.control-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.control-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--text-color);
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+  background-color: rgba(6, 79, 50, 0.1);
+}
+
+.control-btn.active {
+  color: var(--active-control-color);
+}
+
+.play-btn {
+  width: 50px;
+  height: 50px;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 1.5rem;
+}
+
+.play-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(108, 92, 231, 0.4);
+}
+
+.album-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.album-detail-cover {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.album-detail-info h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--light-color);
+}
+
+.album-detail-info p {
+  color: var(--light-color);
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .nav-menu {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .nav-btn span {
+    display: none;
+  }
+  
+  .search-container {
+    width: 100%;
+  }
+  
+  #search-input {
+    width: 100%;
+  }
+  
+  .main-content {
+    padding: 1rem;
+  }
+  
+  .tracks-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+  
+  .albums-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+  
+  .track-cover {
+    height: 150px;
+  }
+  
+  .album-cover {
+    height: 120px;
+  }
+  
+  .album-detail-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .album-detail-cover {
+    width: 150px;
+    height: 150px;
+  }
+
+  .player-container {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 0.5rem;
+  }
+
+  .player-info {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .progress-container {
+    width: 100%;
+    min-width: auto;
+    margin: 0;
+  }
+
+  .control-buttons {
+    width: 100%;
+    justify-content: center;
+    gap: 1rem;
+  }
+}

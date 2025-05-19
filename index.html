@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlayPod - Music Player</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="logo">
+                <i class="fas fa-music"></i>
+                <span>PlayPod</span>
+            </div>
+            <nav class="nav-menu">
+                <button class="nav-btn active" data-section="home"><i class="fas fa-home"></i> Home</button>
+                <button class="nav-btn" data-section="favorites"><i class="fas fa-heart"></i> Favorites</button>
+                <button class="nav-btn" data-section="albums"><i class="fas fa-compact-disc"></i> Albums</button>
+                <button class="nav-btn" data-section="history"><i class="fas fa-history"></i> History</button>
+            </nav>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search tracks...">
+                <button id="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            <button class="control-btn theme-toggle-btn" id="theme-toggle-btn" title="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+        </header>
+
+        <main class="main-content">
+            <section id="home-section" class="content-section active">
+                <h2>Recommended for You</h2>
+                <div class="tracks-grid" id="featured-tracks"></div>
+                
+                <h2>Popular Albums</h2>
+                <div class="albums-grid" id="featured-albums"></div>
+            </section>
+
+            <section id="favorites-section" class="content-section">
+                <h2>My Favorite Tracks</h2>
+                <div class="tracks-grid" id="favorites-tracks"></div>
+            </section>
+
+            <section id="albums-section" class="content-section">
+                <h2>All Albums</h2>
+                <div class="albums-grid" id="all-albums"></div>
+            </section>
+
+            <section id="history-section" class="content-section">
+                <h2>Listening History</h2>
+                <div class="tracks-grid" id="history-tracks"></div>
+            </section>
+
+            <section id="album-detail-section" class="content-section">
+                <div class="album-header" id="album-header"></div>
+                <div class="tracks-grid" id="album-tracks"></div>
+            </section>
+        </main>
+
+        <div class="player-container" id="player-container">
+            <div class="player-info">
+                <img src="" alt="Track cover" class="player-cover" id="player-cover">
+                <div class="player-details">
+                    <h3 class="player-title" id="player-title">Track title</h3>
+                    <p class="player-artist" id="player-artist">Artist</p>
+                </div>
+                <button class="favorite-btn" id="player-favorite-btn" title="Add to favorites"><i class="far fa-heart"></i></button>
+            </div>
+            
+            <div class="player-controls">
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                    <div class="time-display">
+                        <span id="current-time">0:00</span>
+                        <span id="duration">0:00</span>
+                    </div>
+                </div>
+                
+                <div class="control-buttons">
+                    <button class="control-btn" id="prev-btn" title="Previous"><i class="fas fa-step-backward"></i></button>
+                    <button class="control-btn play-btn" id="play-btn" title="Play/Pause"><i class="fas fa-play"></i></button>
+                    <button class="control-btn" id="next-btn" title="Next"><i class="fas fa-step-forward"></i></button>
+                    <button class="control-btn" id="shuffle-btn" title="Shuffle"><i class="fas fa-random"></i></button>
+                    <button class="control-btn" id="repeat-btn" title="Repeat"><i class="fas fa-redo"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="audio-element"></audio>
+    <script src="script.js"></script>
+</body>
+</html>
